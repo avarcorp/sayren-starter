@@ -11,7 +11,14 @@
 - 기본 조회와 훅: `src/lib/queries.ts`(queryOptions) · `src/hooks/use-catalog.ts`(`useStore`·`useCategories`·`useProducts`·`useProduct`).
 - 문구: `messages/ko.json` + `src/i18n`(`m.키()`). 화면 문구는 코드에 쓰지 않고 이 파일에 둔다.
 - 방문 분석: 루트가 `startAnalytics`로 시작한다(`src/lib/analytics.ts`). 서버 쿠키는 `src/lib/cookies.server.ts` 한 곳이다.
-- 스크롤 연출용 `gsap`·`lenis`가 설치돼 있다.
+- 화면을 늘릴 때 쓰도록 미리 설치한 패키지(지금 코드는 쓰지 않는다). 같은 용도로 다른 패키지를 더 설치하지 않는다.
+  - 스크롤 연출: `gsap`·`lenis`
+  - 캐러셀·슬라이더: `embla-carousel-react`
+  - 아이콘: `lucide-react`
+  - URL 상태(필터·정렬·페이지): `nuqs`(쿼리 문자열 직접 다룰 때는 `query-string`)
+  - 폼·입력 검증: `react-hook-form` + `@hookform/resolvers`(스키마는 `zod`)
+  - 배송지 주소 검색: `react-daum-postcode`
+  - 상품 상세설명 표시: `@avarlabs/editor`(읽기 스타일 `reader.css`는 `src/styles.css`가 이미 불러온다)
 
 ## 만들 때의 규칙
 
