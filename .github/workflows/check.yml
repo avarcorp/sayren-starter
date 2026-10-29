@@ -1,0 +1,42 @@
+# 시작 코드 검사 — push·PR마다 돈다. 태그(v*)는 같은 검사를 통과해야 GitHub Release가 생긴다.
+# `npx sayren create`는 releases/latest가 가리키는 태그를 받으므로 검사를 통과하지 못한 태그는 셀러에게 나가지 않는다.
+name: check
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec biome ci --error-on-warnings .
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      # 생성 규칙(@sayren/mcp rules) — 셀러와 같은 게시본 CLI로 본다. 로그인 없이 로컬 트리만 검사한다
+      - run: npx -y sayren@latest verify
+
+  release:
+    needs: check
+    # 이 폴더로 만든 셀러 저장소에서는 릴리스를 만들지 않는다
+    if: startsWith(github.ref, 'refs/tags/v') && github.repository == 'avarcorp/sayren-starter'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --title "$GITHUB_REF_NAME" --generate-notes --verify-tag

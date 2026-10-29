@@ -4,6 +4,7 @@
 상점·상품·주문 데이터는 sayren이 보관하고, 이 앱은 스토어프론트 SDK(`@sayren/storefront-sdk`)로 읽는다.
 
 ## 이미 있는 것
+
 - TanStack Start + React 19 + Tailwind v4(`src/theme.css`의 `@theme` 토큰). 라우트는 `src/routes/`(파일 기반).
 - SDK 연결: 서버 `src/lib/api.server.ts`(`apiFor()`), 브라우저 `src/lib/api.ts`, 설정 `src/lib/config.server.ts`(환경 변수 `SAYREN_API_URL`·`SAYREN_STORE_CODE`, 로컬은 `.env`).
 - 홈: `src/routes/index.tsx` — 상점 이름과 상품 목록(첫 페이지). 금액 표시는 `src/lib/format.ts`(`formatMoney`).
@@ -13,6 +14,7 @@
 - 스크롤 연출용 `gsap`·`lenis`가 설치돼 있다.
 
 ## 만들 때의 규칙
+
 - 셀러가 요청한 화면만 만든다. 장바구니·주문서·결제·구매자 로그인은 셀러가 요청할 때까지 만들지 않는다.
   요청을 받으면 SDK의 장바구니·주문서·`/payments`·`/auth` 모듈로 만들고 `sdk-cart`·`sdk-checkout`·`sdk-payments`·`sdk-buyer-auth` 스킬과 규칙 검증(`verify_site`)을 따른다.
 - 데이터는 라우트 loader에서 `queryClient.ensureQueryData(...)`로 먼저 받고 화면은 훅으로 읽는다. `fetch`로 api를 직접 부르지 않는다.
@@ -22,5 +24,6 @@
 - 기능·화면을 추가·구현·변경하기 전에 `sayren` 스킬(`.claude/skills/sayren`)을 먼저 쓴다. 중앙 스킬 목록(`npx -y sayren@latest skill list`)에서 작업에 맞는 스킬을 골라 본문(`npx -y sayren@latest skill <이름>`)을 읽고 따른다(스킬은 이 프로젝트를 고치지 않고 바뀐다).
 
 ## 확인
+
 - `pnpm typecheck` · `pnpm test` · `pnpm build`
 - 원격 MCP(`.mcp.json`, sayren 계정 로그인)로 상점 데이터를 읽고 `verify_site`로 규칙을 확인한다.
