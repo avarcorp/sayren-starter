@@ -1,12 +1,12 @@
 {
   "name": "sayren-starter",
-  "version": "0.16.1",
+  "version": "0.17.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite dev --port 4010 --strictPort",
+    "dev": "vite dev",
     "build": "vite build",
-    "start": "vite preview --port 4010 --strictPort",
+    "start": "vite preview",
     "lint": "biome check --write . && tsc --noEmit",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"

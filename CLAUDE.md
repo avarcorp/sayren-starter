@@ -33,4 +33,5 @@
 ## 확인
 
 - `pnpm typecheck` · `pnpm test` · `pnpm build`
+- 배포 산출물 경로는 `sayren.json`(`output.static`·`output.server`)이 정한다. 빌드 출력 위치를 바꾸면 이 파일도 같이 고친다.
 - 원격 MCP(`.mcp.json`, sayren 계정 로그인)로 상점 데이터를 읽고 `verify_site`로 규칙을 확인한다.
