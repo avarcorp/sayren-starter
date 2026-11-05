@@ -2,6 +2,8 @@
 
 `npx sayren create <이름>`으로 만든 sayren 스토어프론트입니다. 상점 이름과 상품 목록을 보이는 홈만 있고, 화면은 쇼핑몰에 맞게 새로 만듭니다.
 
+Node.js 22 이상이 필요합니다.
+
 ```bash
 pnpm install
 pnpm dev
